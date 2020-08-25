@@ -5,7 +5,6 @@
  */
 package com.boostedlife.dto;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,16 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GeneralDTO {
+public class OwnedVehiclesDTO {
 
-    private String nombre;
-    private int dineroBolsillo;
-    private int dineroBanco;
-    private String trabajo;
-    private String nombreCompleto;
-    private String telefono;
-    private String steamId;
-    private List<OwnedVehiclesDTO> vehicles;
-    private List<OwnedPropertiesDTO> propiertes;
+    private String plate;
+    private String garage;
+    private String type;
 
 }

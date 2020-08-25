@@ -15,7 +15,13 @@ import {
 import { BoostedBoardComponent } from './boosted-board/boosted-board.component';
 import { LoginComponent } from './login/login.component';
 import { materialConfig } from './materialConfig';
-
+import { HttpClientModule } from '@angular/common/http';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { EnviarDineroDialogComponent } from './boosted-board/enviar-dinero-dialog/enviar-dinero-dialog.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -25,14 +31,22 @@ import { materialConfig } from './materialConfig';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    materialConfig
+    materialConfig,
+    HttpClientModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,
     BoostedBoardComponent,
     LoginComponent,
+    EnviarDineroDialogComponent
 
   ],
+  entryComponents:[EnviarDineroDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

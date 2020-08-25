@@ -19,8 +19,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GeneralRepository extends JpaRepository<Users, Integer> {
 
-    @Query(value = "SELECT name, money, bank, job, CONCAT(firstname, ' ', lastname) as full_name, phone_number\n"
+    @Query(value = "SELECT name, money, bank, job, CONCAT(firstname, ' ', lastname) as full_name, phone_number, identifier\n"
             + "FROM users\n"
             + "WHERE name = :name", nativeQuery = true)
     List<Object[]> inforDelUsuario(@Param("name") String name);
+
+    @Query(value = "SELECT * FROM owned_vehicles\n"
+            + "where owner= :id", nativeQuery = true)
+    List<Object[]> vehiclesOwned(@Param("id") String id);
+    
+    @Query(value = "SELECT * FROM owned_properties\n"
+            + "where owner= :id", nativeQuery = true)
+    List<Object[]> propertiesOwned(@Param("id") String id);
+
 }
