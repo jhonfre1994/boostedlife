@@ -6,56 +6,79 @@
 package com.boostedlife.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  *
- * @author jhonfre
+ * @author jhon
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "usuarios_server")
-@XmlRootElement
-public class UsuariosServer implements Serializable {
+@Table(name = "usr_usuario")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UsrUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * id del usuario.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private Integer idUsuario;
+    /**
+     * nombe del usuario.
+     */
     @Basic(optional = false)
-    @NotNull
+    @Column(name = "nombre_usuario")
+    private String nombreUsuario;
+    /**
+     * nombres del usuario.
+     */
     @Column(name = "nombres")
     private String nombres;
+    /**
+     * apellidos del usuario.
+     */
     @Basic(optional = false)
-    @NotNull
     @Column(name = "apellidos")
     private String apellidos;
+    /**
+     * clave del usuario.
+     */
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "nombre_usuarios")
-    private String nombreUsuarios;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "contrasena")
     private String contrasena;
+    /**
+     * estado del usuario (Activo o Inactivo).
+     */
     @Basic(optional = false)
-    @NotNull
     @Column(name = "identifier")
     private String identifier;
-
+    /**
+     * lista de roles asociados al usuario.
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usr_rol_usuario", joinColumns
+            = @JoinColumn(name = "id_usuario",
+                    referencedColumnName = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_rol",
+                    referencedColumnName = "id_rol"))
+    private List<UsrRol> roles;
 }

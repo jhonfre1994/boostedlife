@@ -6,7 +6,7 @@
 package com.boostedlife.web;
 
 import com.boostedlife.dto.IdentifiresAndNamUseresDTO;
-import com.boostedlife.dto.UsuariosServerDTO;
+import com.boostedlife.dto.UsrUsuariosDTO;
 import com.boostedlife.service.UsuariosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class UsuariosServerController {
 
     @GetMapping("/")
     public ResponseEntity<?> listarUsuarios() {
-        List<UsuariosServerDTO> res = service.listarUsuarios();
+        List<UsrUsuariosDTO> res = service.listarUsuarios();
         return ResponseEntity.ok(res);
     }
 
@@ -43,8 +43,8 @@ public class UsuariosServerController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> guardarUsuario(@RequestBody UsuariosServerDTO dto) {
-        UsuariosServerDTO res = service.guardarUsuarioServer(dto);
+    public ResponseEntity<?> guardarUsuario(@RequestBody UsrUsuariosDTO dto) {
+        UsrUsuariosDTO res = service.guardarUsuarioServer(dto);
         return ResponseEntity.ok(res);
     }
 }

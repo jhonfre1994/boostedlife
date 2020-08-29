@@ -6,17 +6,17 @@
 package com.boostedlife.service;
 
 import com.boostedlife.dto.IdentifiresAndNamUseresDTO;
-import com.boostedlife.dto.UsuariosServerDTO;
-import com.boostedlife.entity.UsuariosServer;
+import com.boostedlife.dto.UsrUsuariosDTO;
+import com.boostedlife.entity.UsrUsuarios;
 import com.boostedlife.exceptions.responses.BadRequestException;
 import com.boostedlife.repository.GeneralRepository;
-import com.boostedlife.repository.UsuariosServerRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.boostedlife.repository.UsuarioRepository;
 
 /**
  *
@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsuariosServiceImpl implements UsuariosService {
 
     @Autowired
-    private UsuariosServerRepository usuariosServerRepository;
+    private UsuarioRepository usuariosServerRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -35,13 +35,13 @@ public class UsuariosServiceImpl implements UsuariosService {
     private GeneralRepository generalRepository;
 
     @Override
-    public List<UsuariosServerDTO> listarUsuarios() {
-        List<UsuariosServer> usuarios = usuariosServerRepository.findAll();
-        List<UsuariosServerDTO> res = new ArrayList<>();
+    public List<UsrUsuariosDTO> listarUsuarios() {
+        List<UsrUsuarios> usuarios = usuariosServerRepository.findAll();
+        List<UsrUsuariosDTO> res = new ArrayList<>();
         if (usuarios != null && !usuarios.isEmpty()) {
-            for (UsuariosServer usuario : usuarios) {
-                UsuariosServerDTO item = new UsuariosServerDTO();
-                item = mapper.map(usuario, UsuariosServerDTO.class);
+            for (UsrUsuarios usuario : usuarios) {
+                UsrUsuariosDTO item = new UsrUsuariosDTO();
+                item = mapper.map(usuario, UsrUsuariosDTO.class);
                 item.setContrasena("");
                 res.add(item);
             }
@@ -69,15 +69,15 @@ public class UsuariosServiceImpl implements UsuariosService {
 
     @Override
     @Transactional
-    public UsuariosServerDTO guardarUsuarioServer(UsuariosServerDTO dto) {
-        UsuariosServer res = new UsuariosServer();
+    public UsrUsuariosDTO guardarUsuarioServer(UsrUsuariosDTO dto) {
+        UsrUsuarios res = new UsrUsuarios();
         if (dto.getNombres().isEmpty() || dto.getApellidos().isEmpty() || dto.getIdentifier().isEmpty()
-                || dto.getNombreUsuarios().isEmpty()) {
+                || dto.getNombreUsuario().isEmpty()) {
             throw new BadRequestException("Error al guardar el usuario");
         }
 
         try {
-            res = usuariosServerRepository.save(mapper.map(dto, UsuariosServer.class));
+            res = usuariosServerRepository.save(mapper.map(dto, UsrUsuarios.class));
 
             if (res == null) {
                 throw new BadRequestException("ERROR");
@@ -87,7 +87,7 @@ public class UsuariosServiceImpl implements UsuariosService {
             throw new BadRequestException("El id steam ya esta asignado a otro usuario");
         }
 
-        return mapper.map(res, UsuariosServerDTO.class);
+        return mapper.map(res, UsrUsuariosDTO.class);
     }
 
 }

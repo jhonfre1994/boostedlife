@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
-import { UsuariosServerDTO } from 'app/model/UsuariosServerDTO';
 import { IdentifiresAndNamUseresDTO } from 'app/model/IdentifiresAndNamUseresDTO';
+import { UsrUsuarioDTO } from 'app/model/UsrUsuarioDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +18,15 @@ export class UsaurioService {
   }
 
 
-  public listarUsuarios(): Observable<UsuariosServerDTO[]> {
-    return this.http.get<UsuariosServerDTO[]>(environment.url + "/api/v.1/usuarios/")
+  public listarUsuarios(): Observable<UsrUsuarioDTO[]> {
+    return this.http.get<UsrUsuarioDTO[]>(environment.url + "/api/v.1/usuarios/")
   }
 
   public namesAnsIdentifiresUsers(): Observable<IdentifiresAndNamUseresDTO[]> {
     return this.http.get<IdentifiresAndNamUseresDTO[]>(environment.url + "/api/v.1/usuarios/usersAnsNamesUsuers")
   }
 
-  public saveUser(dto: UsuariosServerDTO): Observable<UsuariosServerDTO> {
-    return this.http.post<UsuariosServerDTO>(environment.url + "/api/v.1/usuarios/", dto, this.header)
+  public saveUser(dto: UsrUsuarioDTO): Observable<UsrUsuarioDTO> {
+    return this.http.post<UsrUsuarioDTO>(environment.url + "/api/v.1/usuarios/", dto, this.header)
   }
 }

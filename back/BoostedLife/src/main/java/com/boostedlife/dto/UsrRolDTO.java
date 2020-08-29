@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author jhonfre
+ * @author jhon
  */
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuariosServerDTO {
-    
-    private Integer idUsuario;
-    private String nombres;
-    private String apellidos;
-    private String nombreUsuarios;
-    private String contrasena;
-    private String identifier;
-
+@Data
+public class UsrRolDTO {
+    /**
+     * id del rol.
+     */
+    private Integer idRol;
+    /**
+     * nombre del rol.
+     */
+    private String nombre;
 }
