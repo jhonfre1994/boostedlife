@@ -27,9 +27,14 @@ public interface GeneralRepository extends JpaRepository<Users, Integer> {
     @Query(value = "SELECT * FROM owned_vehicles\n"
             + "where owner= :id", nativeQuery = true)
     List<Object[]> vehiclesOwned(@Param("id") String id);
-    
+
     @Query(value = "SELECT * FROM owned_properties\n"
             + "where owner= :id", nativeQuery = true)
     List<Object[]> propertiesOwned(@Param("id") String id);
+
+    @Query(value = "SELECT name, identifier\n"
+            + "FROM users\n"
+            + "order by name asc", nativeQuery = true)
+    List<Object[]> identifierAndNameUsers();
 
 }

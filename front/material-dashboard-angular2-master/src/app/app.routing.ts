@@ -4,11 +4,12 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { BoostedBoardComponent } from './boosted-board/boosted-board.component';
 import { LoginComponent } from './login/login.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'boostedBoard',
+    redirectTo: 'boostedUsers',
     pathMatch: 'full',
   },
   {
@@ -16,6 +17,9 @@ const routes: Routes =[
   },
   {
     path:'boostedBoard', component: BoostedBoardComponent
+  },
+  {
+    path:'boostedUsers', component:UsuariosComponent
   }
 ];
 

@@ -22,6 +22,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { EnviarDineroDialogComponent } from './boosted-board/enviar-dinero-dialog/enviar-dinero-dialog.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -37,13 +40,15 @@ import { EnviarDineroDialogComponent } from './boosted-board/enviar-dinero-dialo
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxMatSelectSearchModule
   ],
   declarations: [
     AppComponent,
     BoostedBoardComponent,
     LoginComponent,
-    EnviarDineroDialogComponent
+    EnviarDineroDialogComponent,
+    UsuariosComponent
 
   ],
   entryComponents:[EnviarDineroDialogComponent],
