@@ -6,6 +6,7 @@
 package com.boostedlife.web;
 
 import com.boostedlife.dto.IdentifiresAndNamUseresDTO;
+import com.boostedlife.dto.UsrRolDTO;
 import com.boostedlife.dto.UsrUsuariosDTO;
 import com.boostedlife.service.UsuariosService;
 import java.util.List;
@@ -45,6 +46,12 @@ public class UsuariosServerController {
     @PostMapping("/")
     public ResponseEntity<?> guardarUsuario(@RequestBody UsrUsuariosDTO dto) {
         UsrUsuariosDTO res = service.guardarUsuarioServer(dto);
+        return ResponseEntity.ok(res);
+    }
+    
+    @GetMapping("/roles")
+    public ResponseEntity<?> rolesList(){
+        List<UsrRolDTO> res = service.listRoles();
         return ResponseEntity.ok(res);
     }
 }

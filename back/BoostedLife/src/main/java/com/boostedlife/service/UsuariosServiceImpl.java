@@ -6,10 +6,13 @@
 package com.boostedlife.service;
 
 import com.boostedlife.dto.IdentifiresAndNamUseresDTO;
+import com.boostedlife.dto.UsrRolDTO;
 import com.boostedlife.dto.UsrUsuariosDTO;
+import com.boostedlife.entity.UsrRol;
 import com.boostedlife.entity.UsrUsuarios;
 import com.boostedlife.exceptions.responses.BadRequestException;
 import com.boostedlife.repository.GeneralRepository;
+import com.boostedlife.repository.UsrRolRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.boostedlife.repository.UsrUsuarioRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -33,6 +37,9 @@ public class UsuariosServiceImpl implements UsuariosService {
 
     @Autowired
     private GeneralRepository generalRepository;
+    
+    @Autowired
+    private UsrRolRepository rolRepository;
 
     @Override
     public List<UsrUsuariosDTO> listarUsuarios() {
@@ -75,10 +82,11 @@ public class UsuariosServiceImpl implements UsuariosService {
                 || dto.getNombreUsuario().isEmpty()) {
             throw new BadRequestException("Error al guardar el usuario");
         }
-
         try {
+            if (!dto.getContrasena().isEmpty()) {
+                dto.setContrasena(new BCryptPasswordEncoder().encode(dto.getContrasena()));
+            }
             res = usuariosServerRepository.save(mapper.map(dto, UsrUsuarios.class));
-
             if (res == null) {
                 throw new BadRequestException("ERROR");
             }
@@ -86,8 +94,20 @@ public class UsuariosServiceImpl implements UsuariosService {
             System.out.println(e);
             throw new BadRequestException("El id steam ya esta asignado a otro usuario");
         }
-
         return mapper.map(res, UsrUsuariosDTO.class);
+    }
+
+    @Override
+    public List<UsrRolDTO> listRoles() {
+        List<UsrRol> roles = rolRepository.findAll();
+        List<UsrRolDTO> res = new ArrayList<>();
+        if(roles != null && !roles.isEmpty()){
+            for (UsrRol role : roles) {
+                res.add(mapper.map(role, UsrRolDTO.class));
+            }
+            return res;
+        }
+        throw new BadRequestException("Error al cargar los roles");
     }
 
 }

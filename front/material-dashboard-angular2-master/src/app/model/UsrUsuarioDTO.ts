@@ -1,3 +1,5 @@
+import { UsrRolDTO } from "./UsrRolDTO";
+
 export class UsrUsuarioDTO {
     public  idUsuario: number;
     public  nombres: string;
@@ -5,4 +7,5 @@ export class UsrUsuarioDTO {
     public  nombreUsuario: string;
     public  contrasena: string;
     public  identifier: string;
+    public roles: Array<UsrRolDTO>;
 }

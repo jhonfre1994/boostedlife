@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IdentifiresAndNamUseresDTO } from 'app/model/IdentifiresAndNamUseresDTO';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsrUsuarioDTO } from 'app/model/UsrUsuarioDTO';
+import { UsrRolDTO } from 'app/model/UsrRolDTO';
 
 @Component({
   selector: 'app-usuarios',
@@ -16,7 +17,8 @@ export class UsuariosComponent implements OnInit {
   public usuarios: Array<UsrUsuarioDTO> = [];
   public usersIdentifiers: Array<IdentifiresAndNamUseresDTO> = [];
   public usuariosdto: UsrUsuarioDTO = new UsrUsuarioDTO;
-
+  public rolesList: Array<UsrRolDTO> = [];
+  public rolesSelected: Array<UsrRolDTO> = [];
 
   constructor(private usaurioService: UsaurioService,
     private formBuilder: FormBuilder,
@@ -25,7 +27,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
 
-
+    this.rolesListServer();
     this.listarUsuarios();
     this.namesAndIdentifiers();
   }
@@ -36,7 +38,8 @@ export class UsuariosComponent implements OnInit {
       apellidos: ['', Validators.required],
       nombreUsuario: ['', [Validators.required]],
       contraseña: ['', [Validators.required]],
-      idSteam: ['', Validators.required]
+      idSteam: ['', Validators.required],
+      roles:['', Validators.required]
     })
 
     this.userForm.get('contraseña').valueChanges.subscribe(val => {
@@ -52,6 +55,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarios = [];
     this.usaurioService.listarUsuarios().subscribe(res => {
       if (res != null) {
+        console.log(res);
         this.usuarios = res;
       }
     },
@@ -80,6 +84,7 @@ export class UsuariosComponent implements OnInit {
     this.usuariosdto.nombreUsuario = this.userForm.get('nombreUsuario').value;
     this.usuariosdto.contrasena = this.userForm.get("contraseña").value;
     this.usuariosdto.identifier = this.userForm.get('idSteam').value.identifies;
+    this.usuariosdto.roles = this.rolesSelected;
     console.log(this.usuariosdto)
     this.usaurioService.saveUser(this.usuariosdto).subscribe(res => {
       if (res != null) {
@@ -96,21 +101,22 @@ export class UsuariosComponent implements OnInit {
   }
 
   editUser(item: UsrUsuarioDTO) {
+    console.log(item);
     this.usuariosdto.idUsuario = item.idUsuario;
     this.userForm.get('nombres').setValue(item.nombres);
     this.userForm.get('apellidos').setValue(item.apellidos);
     this.userForm.get('nombreUsuario').setValue(item.nombreUsuario);
     this.userForm.get('contraseña').setValue(item.contrasena);
     this.userForm.controls['idSteam'].setValue(this.usersIdentifiers.find(x => x.identifies === item.identifier));
-    console.log(this.usuariosdto)
-    this.userForm.get('contraseña').setValue(item.nombres);
-    console.log(this.userForm.value)
-  }
+    this.userForm.get('contraseña').setValue("");
+    let roles = new Array<String>()
+    item.roles.forEach(element => {
+      roles.push(element.nombre)
+    });
+    this.userForm.get('roles').setValue(roles);
 
-  filterListCareUnit(val) {
-    console.log(val);
-    this.usersIdentifiers = this.usersIdentifiers.filter((unit) => unit.name.indexOf(val) > -1);
-    console.log(this.usersIdentifiers)
+
+    console.log(this.userForm.value)
   }
 
   openSnackBar(message: string, action: string) {
@@ -118,5 +124,25 @@ export class UsuariosComponent implements OnInit {
       duration: 2000,
     });
   }
+
+  rolesListServer(){
+    this.usaurioService.rolList().subscribe( res => {
+      if(res != null){
+        this.rolesList = res;
+        console.log(res);
+      }
+    })
+  }
+
+  rolSelect(event, causa: UsrRolDTO) {
+    console.log(event,causa)
+    if (event.source.selected) {
+      this.rolesSelected.push(causa);
+    } else {
+      this.rolesSelected.splice(this.rolesSelected.indexOf(causa), 1)
+    }
+    console.log(this.rolesSelected)
+  }
+
 
 }

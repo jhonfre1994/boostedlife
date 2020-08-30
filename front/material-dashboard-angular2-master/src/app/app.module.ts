@@ -15,7 +15,7 @@ import {
 import { BoostedBoardComponent } from './boosted-board/boosted-board.component';
 import { LoginComponent } from './login/login.component';
 import { materialConfig } from './materialConfig';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -24,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import { EnviarDineroDialogComponent } from './boosted-board/enviar-dinero-dialog/enviar-dinero-dialog.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 @NgModule({
   imports: [
@@ -52,7 +53,13 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
   ],
   entryComponents:[EnviarDineroDialogComponent],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

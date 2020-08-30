@@ -6,6 +6,7 @@
 package com.boostedlife.service;
 
 import com.boostedlife.dto.IdentifiresAndNamUseresDTO;
+import com.boostedlife.dto.UsrRolDTO;
 import com.boostedlife.dto.UsrUsuariosDTO;
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface UsuariosService {
     List<IdentifiresAndNamUseresDTO> namesAndIdentifiresUsers();
     
     UsrUsuariosDTO guardarUsuarioServer(UsrUsuariosDTO dto);
+    
+    List<UsrRolDTO> listRoles();
     
 }

@@ -47,6 +47,17 @@
                         </mat-form-field>
                     </div>
 
+
+                    <div class="col-lg-4 col-md-6 col-sm-6" style="margin-top: 20px;">
+                        <mat-label>Roles:</mat-label>
+                        <mat-select placeholder="" required multiple formControlName="roles">
+                            <mat-option *ngFor="let rol of rolesList" [value]="rol.nombre"
+                              (onSelectionChange)="rolSelect($event,rol)">
+                              {{rol.nombre}}
+                            </mat-option>
+                          </mat-select>          
+                    </div>
+
                     <div class="col-lg-4 col-md-6 col-sm-6" style="margin-top: 20px;">
                         <button style="width: 100%;" (click)="saveUser()" [disabled]="userForm.invalid"
                             mat-raised-button color="primary">Guardar</button>

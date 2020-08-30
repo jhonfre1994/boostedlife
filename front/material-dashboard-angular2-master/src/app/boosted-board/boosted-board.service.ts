@@ -12,7 +12,7 @@ export class BoostedBoardService {
   constructor(public http: HttpClient) { }
 
   public gerGeneralData(nameUser: string):Observable<GeneralDTO>{
-    return this.http.get<GeneralDTO>(environment.url + "/api/v.1/consultaGeneral/" + nameUser)
+    return this.http.get<GeneralDTO>(environment.url + "api/v.1/consultaGeneral/" + nameUser)
   }
 
 }
