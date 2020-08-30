@@ -1,0 +1,19 @@
+.login{
+    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#5E594F, #7D7968, #949180, #A9AB98) !important;
+  }
+  input{
+    width: 100%;
+  }
+  
+  .cardLogin{
+    padding: 0px !important;
+  }
+  
+  .botonDiv{
+    padding: 0 16px 16px 16px;
+  }
+  

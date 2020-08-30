@@ -1,0 +1,27 @@
+
+<div class="login">
+    <mat-card class="cardLogin" style="width: 400px;">
+      <!-- <p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="IsWait"></p-progressBar> -->
+      <div class="botonDiv" style="align-items: center;">
+        <img style="width: 350px" src="Card" src="assets/img/boosted-login.jpeg">
+        <br><br>
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Usuario</mat-label>
+          <input (keyup.enter)="login()" matInput [(ngModel)]="loginAccess.username"  placeholder="Ingresar usuario" name="usuario" type="text"
+             required>
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100%;margin-top: -20px">
+          <mat-label>Clave</mat-label>
+          <input (keyup.enter)="login()" matInput name="password" type="password" [(ngModel)]="loginAccess.password" placeholder="Ingresar clave"
+            required>
+          <mat-icon matSuffix>https</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="botonDiv">
+        <button color="primary" style="width: 100%;" (click)="login()" mat-raised-button color="primary">Iniciar
+          Sesión</button>
+      </div>
+    </mat-card>
+  </div>
+  
