@@ -10,11 +10,13 @@ export class UserService {
   constructor() {
   }
 
-  SavesessionStorage(accessToken: string, refre: string) {
+  SavesessionStorage(accessToken: string, refre: string, username: string) {
     const decodedToken = this.jwtHelper.decodeToken(accessToken);
     this.accessToken = accessToken;
     sessionStorage.setItem('access_token', accessToken);
     sessionStorage.setItem("refresh_token", refre);
+    sessionStorage.setItem("username", username);
+
   }
 
 

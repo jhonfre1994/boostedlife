@@ -18,7 +18,7 @@ export class BoostedBoardComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.gerGeneralData("YeYo99");
+    this.gerGeneralData(sessionStorage.getItem("username"));
   }
 
   public gerGeneralData(nameUSer: string) {

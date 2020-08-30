@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 import {
@@ -25,6 +24,7 @@ import { EnviarDineroDialogComponent } from './boosted-board/enviar-dinero-dialo
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 @NgModule({
   imports: [
@@ -32,7 +32,6 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    ComponentsModule,
     RouterModule,
     AppRoutingModule,
     materialConfig,
@@ -49,7 +48,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     BoostedBoardComponent,
     LoginComponent,
     EnviarDineroDialogComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    MenuComponent
 
   ],
   entryComponents:[EnviarDineroDialogComponent],

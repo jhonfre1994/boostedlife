@@ -1,0 +1,42 @@
+<div class="example-container">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <!-- <h1 class="example-app-name">Responsive App</h1> -->
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav>
+            <div class="box">
+                <img class="avatar" src="./assets/img/face.jpg" width="250">
+            </div>
+            <mat-nav-list>
+                <mat-nav-list class="ml-0" dense>
+                    <mat-list-item>
+                        <a href="boostedBoard">Boosted Dashboard</a>
+                        <!-- <button mat-icon-button class="mr-3">
+                  <mat-icon>info</mat-icon>
+                </button> -->
+                    </mat-list-item>
+                    <mat-list-item>
+                        <a href="boostedUsers">Usuarios</a>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <a href="login">Cerrar sesión</a>
+                    </mat-list-item>
+                </mat-nav-list>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
