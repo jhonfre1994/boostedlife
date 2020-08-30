@@ -16,7 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.boostedlife.repository.UsuarioRepository;
+import com.boostedlife.repository.UsrUsuarioRepository;
 
 /**
  *
@@ -26,7 +26,7 @@ import com.boostedlife.repository.UsuarioRepository;
 public class UsuariosServiceImpl implements UsuariosService {
 
     @Autowired
-    private UsuarioRepository usuariosServerRepository;
+    private UsrUsuarioRepository usuariosServerRepository;
 
     @Autowired
     private ModelMapper mapper;

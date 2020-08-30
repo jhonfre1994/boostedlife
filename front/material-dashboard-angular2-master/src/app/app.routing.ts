@@ -9,7 +9,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'boostedUsers',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
