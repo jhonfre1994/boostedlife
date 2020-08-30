@@ -20,6 +20,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { RoleGuardService } from './guards/role-guard.service';
+import { AuthService } from './guards/auth.service';
 
 @NgModule({
   imports: [
@@ -49,6 +52,10 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   entryComponents:[EnviarDineroDialogComponent],
   providers: [
+    AuthService,
+    RoleGuardService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

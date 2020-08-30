@@ -6,6 +6,8 @@ import { BoostedBoardComponent } from './boosted-board/boosted-board.component';
 import { LoginComponent } from './login/login.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { RoleGuardService } from './guards/role-guard.service';
+import { AuthService } from './guards/auth.service';
 
 const routes: Routes = [
   {
@@ -19,12 +21,17 @@ const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
+    canActivate:[AuthService],
     children: [
       {
         path: 'boostedBoard', component: BoostedBoardComponent
       },
       {
-        path: 'boostedUsers', component: UsuariosComponent
+        path: 'boostedUsers', component: UsuariosComponent,
+        canActivate: [RoleGuardService],
+        data: {
+          expectedRole: ["SuperAdmin"]
+        }
       }
     ]
   }

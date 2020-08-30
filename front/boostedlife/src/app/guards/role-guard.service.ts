@@ -15,10 +15,11 @@ export class RoleGuardService implements CanActivate {
     constructor(public auth: AuthService, public router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot): boolean {
-
         const expectedRole = route.data.expectedRole;
         const token = sessionStorage.getItem("access_token");
         const tokenPayload = decode(token);
+        debugger
+    
         if (
             this.auth.isLoggin() &&
             this.validarRol(tokenPayload.authorities, expectedRole) == true) {

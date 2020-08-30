@@ -28,8 +28,9 @@ export class LoginComponent implements OnInit {
         result => {
           if (result) {
             console.log(result);
-            this.navigateAfterSuccess();
             this.userService.SavesessionStorage(result.access_token, result.refresh_token, this.loginAccess.username);
+            this.navigateAfterSuccess();
+
             /* this.loginService.consultarUsr(this.loginAccess.username).subscribe(res => {
 
               if (res != null) {
