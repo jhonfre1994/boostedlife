@@ -21,8 +21,8 @@ public interface GeneralRepository extends JpaRepository<Users, Integer> {
 
     @Query(value = "SELECT name, money, bank, job, CONCAT(firstname, ' ', lastname) as full_name, phone_number, identifier\n"
             + "FROM users\n"
-            + "WHERE name = :name", nativeQuery = true)
-    List<Object[]> inforDelUsuario(@Param("name") String name);
+            + "WHERE  identifier = (select identifier from usr_usuario WHERE nombre_usuario = :username)", nativeQuery = true)
+    List<Object[]> inforDelUsuario(@Param("username") String name);
 
     @Query(value = "SELECT * FROM owned_vehicles\n"
             + "where owner= :id", nativeQuery = true)

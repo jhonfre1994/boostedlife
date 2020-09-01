@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.boostedlife.repository.UsrUsuarioRepository;
+import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -37,7 +38,7 @@ public class UsuariosServiceImpl implements UsuariosService {
 
     @Autowired
     private GeneralRepository generalRepository;
-    
+
     @Autowired
     private UsrRolRepository rolRepository;
 
@@ -83,7 +84,14 @@ public class UsuariosServiceImpl implements UsuariosService {
             throw new BadRequestException("Error al guardar el usuario");
         }
         try {
-            if (!dto.getContrasena().isEmpty()) {
+            Optional<UsrUsuarios> exist = usuariosServerRepository.findById(dto.getIdUsuario());
+            if (exist.isPresent()) {
+                if (!dto.getContrasena().isEmpty()) {
+                    dto.setContrasena(new BCryptPasswordEncoder().encode(dto.getContrasena()));
+                } else {
+                    dto.setContrasena(exist.get().getContrasena());
+                }
+            } else {
                 dto.setContrasena(new BCryptPasswordEncoder().encode(dto.getContrasena()));
             }
             res = usuariosServerRepository.save(mapper.map(dto, UsrUsuarios.class));
@@ -101,7 +109,7 @@ public class UsuariosServiceImpl implements UsuariosService {
     public List<UsrRolDTO> listRoles() {
         List<UsrRol> roles = rolRepository.findAll();
         List<UsrRolDTO> res = new ArrayList<>();
-        if(roles != null && !roles.isEmpty()){
+        if (roles != null && !roles.isEmpty()) {
             for (UsrRol role : roles) {
                 res.add(mapper.map(role, UsrRolDTO.class));
             }
